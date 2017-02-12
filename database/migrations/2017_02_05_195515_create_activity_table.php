@@ -15,8 +15,11 @@ class CreateActivityTable extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('type');
-            $table->string('notes');
+            $table->enum('type', ['input', 'output', 'bp'])->default('input');
+            $table->smallInteger('amount1')->unsigned();
+            $table->smallInteger('amount2')->nullable()->unsigned();
+            $table->string('notes')->nullable();
+            $table->dateTime('saved_at');
             $table->timestamps();
         });
     }
